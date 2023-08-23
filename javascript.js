@@ -55,6 +55,24 @@ function displayBooks() {
   h6.innerText = myLibrary[myLibrary.length - 1].author;
   p.innerText = myLibrary[myLibrary.length - 1].pages + " pages";
 
+  let readDiv = document.createElement("div");
+  readDiv.className = "form-check";
+  let readStatus = document.createElement("input");
+  readStatus.className = "form-check-input";
+  readStatus.type = "checkbox";
+  readStatus.id = "read-check"
+  let label = document.createElement("label");
+  label.className = "form-check-label";
+  label.htmlFor = "read-check"
+  label.innerHTML = "Read";
+  if(myLibrary[myLibrary.length-1].read == true){
+    readStatus.checked = true;
+  }
+
+  readDiv.appendChild(readStatus);
+  readDiv.appendChild(label);
+  div.appendChild(readDiv);
+
   let deleteBtn = document.createElement("button");
   deleteBtn.className = "btn btn-close position-absolute top-0 end-0";
   deleteBtn.ariaLabel = "Close";
@@ -77,7 +95,8 @@ addBtn.onclick = (event) => {
   const title = form.elements[0].value;
   const author = form.elements[1].value;
   const pages = form.elements[2].value;
-  const read = form.elements[3].value;
+  const read = form.elements[3].checked;
+  console.log(read);
   if (title.length === 0 || author.length === 0 || pages == 0) {
     document.getElementById("alert").innerHTML = "Please fill out all the fields!";
   } else {
